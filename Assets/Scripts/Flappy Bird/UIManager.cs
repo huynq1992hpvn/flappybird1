@@ -9,14 +9,13 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance = null;
     public TextMeshProUGUI textScore;
     public GameObject buttonStartGame;
-    public GameObject loseGamePannel;
-    public Image imageMedalButton;
-    public Sprite buttonBonzeSprite;
-    public Sprite buttonSilverSprite;
-    public Sprite buttonGoldSprite;
+    public UILoseGame loseGamePannel;
+    public GameObject splashScreen;
+   
     // Start is called before the first frame update
     void Start()
     {
+        splashScreen.SetActive(false);
         Instance = this;
         UpdateScore(0);
     }
@@ -36,24 +35,17 @@ public class UIManager : MonoBehaviour
     }
     public void LoseGame()
     {
-        loseGamePannel.SetActive(true);
+        StartCoroutine(WaitForLose());
     }
-    public void UIMedal(int score)
+   private IEnumerator WaitForLose ()
     {
-        if (score >= 8)
-        {
-            // Hiển thị huy chương vàng
-            imageMedalButton.sprite = buttonGoldSprite;
-        }
-        else if (score >= 5)
-        {
-            // Hiển thị huy chương bạc
-            imageMedalButton.sprite = buttonSilverSprite;
-        }
-        else if (score >= 0)
-        {
-            // Hiển thị huy chương đồng
-            imageMedalButton.sprite = buttonBonzeSprite;
-        }
+        splashScreen.SetActive (true);
+        yield return new WaitForSeconds(0.2f);
+        splashScreen.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        loseGamePannel.Show();
+        int playerScore = GameManager.Instance.GetScore();
+        loseGamePannel.SetPlayerScoreText(playerScore);
+        loseGamePannel.SetMedalImage(playerScore);
     }
 } 

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         isPauseGame = false;
         isStartGame = false;
     }
+
     public void StartGame()
     {
         isStartGame = true;
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
         score++;
         UIManager.Instance.UpdateScore(score);
         AudioManager.Instance.PlayAudioScore();
-        UIManager.Instance.UIMedal(score);
+        
 
     }
     public void PauseGame()
@@ -62,6 +63,10 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.LoseGame();
         }
         isFirstCollision = true;
+    }
+    public int GetScore()
+    {
+        return score;
     }
 }
 

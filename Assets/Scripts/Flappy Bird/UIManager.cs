@@ -11,7 +11,8 @@ public class UIManager : MonoBehaviour
     public GameObject buttonStartGame;
     public UILoseGame loseGamePannel;
     public GameObject splashScreen;
-   
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,5 +48,7 @@ public class UIManager : MonoBehaviour
         int playerScore = GameManager.Instance.GetScore();
         loseGamePannel.SetPlayerScoreText(playerScore);
         loseGamePannel.SetMedalImage(playerScore);
+        int bestScore = PlayerPrefs.GetInt("BestScore");
+        loseGamePannel.SetBestScoreText(bestScore);
     }
 } 

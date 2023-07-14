@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class BirdCollision : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
-    private void Start()
-    {
-        
-    }
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         CheckDie(collision);

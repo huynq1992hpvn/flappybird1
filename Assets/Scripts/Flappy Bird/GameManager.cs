@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
     public bool isEndGame;
-    public int score;
+    
     public bool isStartGame;
     private bool isFirstCollision = false;
     public BirdController bird;
@@ -26,10 +26,11 @@ public class GameManager : MonoBehaviour
     }
     public void AddScore()
     {
-        score++;
-        UIManager.Instance.UpdateScore(score);
+        DataManager.Instance.AddScore();
+        int playerscore = DataManager.Instance.GetScore();
+        UIManager.Instance.UpdateScore(playerscore);
         AudioManager.Instance.PlayAudioScore();
-        
+      
 
     }
     public void PauseGame()
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
     {
         if (isFirstCollision == false)
         {
+            DataManager.Instance.SetBestScore();
             isEndGame = true;
             AudioManager.Instance.PlayEndGameAudio();
             UIManager.Instance.LoseGame();
@@ -66,7 +68,7 @@ public class GameManager : MonoBehaviour
     }
     public int GetScore()
     {
-        return score;
+        return DataManager.Instance.GetScore();
     }
 }
 

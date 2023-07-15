@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Pipe : MonoBehaviour
 {
-    public float speed;
+    
 
     // Update is called once per frame
     void Update()
 
     {
         if (GameManager.Instance.isEndGame)  return; 
-        this.transform.position += Vector3.left * speed *Time.deltaTime; 
+        this.transform.position += Vector3.left * GameManager.Instance.speed *Time.deltaTime; 
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

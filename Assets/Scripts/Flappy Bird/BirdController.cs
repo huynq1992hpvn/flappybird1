@@ -9,6 +9,7 @@ public class BirdController : MonoBehaviour
     public float JumpForce;
     public float JumpAngle;
     public float angleRotateSpeed;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,10 @@ public class BirdController : MonoBehaviour
         rigid2d.velocity = Vector2.up * JumpForce;
         transform.eulerAngles = new Vector3(0, 0, JumpAngle);
         AudioManager.Instance.PlayFlapBird();
+    }
+    public void Dead()
+    {
+        animator.enabled = false;
     }
     protected void RotateBird()
     {

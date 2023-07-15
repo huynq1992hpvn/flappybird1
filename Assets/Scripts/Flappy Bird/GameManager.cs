@@ -11,12 +11,22 @@ public class GameManager : MonoBehaviour
     public bool isStartGame;
     private bool isFirstCollision = false;
     public BirdController bird;
+    public BirdController birdPrefab;
     public bool isPauseGame;
-    private void Start()
+    public Transform spawnPosition;
+    public float speed;
+    private void Awake()
     {
         Instance = this;
+    }
+    private void Start()
+    {
+        
         isPauseGame = false;
         isStartGame = false;
+        bird = Instantiate(birdPrefab, spawnPosition.position, Quaternion.identity);
+        
+
     }
 
     public void StartGame()
@@ -59,6 +69,7 @@ public class GameManager : MonoBehaviour
     {
         if (isFirstCollision == false)
         {
+            bird.Dead();
             DataManager.Instance.SetBestScore();
             isEndGame = true;
             AudioManager.Instance.PlayEndGameAudio();
